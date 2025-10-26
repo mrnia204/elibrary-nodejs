@@ -1,11 +1,14 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+// contexts/AuthContext.tsx
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type UserRole = 'stuent' | 'admin';
+export type UserRole = 'student' | 'admin';
 
 interface User {
   username: string;
   role: UserRole;
-  user_id?: string;
+  userId?: string;
+  activityId?: string;
+  loginTime?: string;
 }
 
 interface AuthContextType {
@@ -13,11 +16,11 @@ interface AuthContextType {
   login: (userData: User) => void;
   logout: () => void;
   isAuthenticated: boolean;
-};
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider:React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -32,24 +35,26 @@ export const AuthProvider:React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
-  const logout = () => { setUser(null)};
-  localStorage.removeItem('user');
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
 
   const isAuthenticated = !!user;
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated}}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
-}
- 
+};
+
+
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
-
   return context;
-}
+};
