@@ -11,6 +11,7 @@ const BASE_URL = import.meta.env.DEV
 export const http = axios.create({
   baseURL: BASE_URL,
   withCredentials: true, // Important for CORS with credentials
+  timeout: 10000,
 });
 
 // Enhanced error handling
@@ -31,6 +32,7 @@ export async function post(endpoint: string, data: RequestData | FormData) {
 
 export async function get(endpoint: string, params?: Record<string, string | number>) {
   try {
+    console.log("Making request to:", `${http.defaults.baseURL}${endpoint}`)
     const response = await http.get(endpoint, { params });
     return response.data;
   } catch (error) {

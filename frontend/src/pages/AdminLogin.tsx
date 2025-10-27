@@ -1,4 +1,4 @@
-import AdminLoginForm from "@/components/constant/AdminFormLogin";
+import AdminLoginForm from "@/components/forms/AdminLoginForm";
 import { NavLink } from "react-router-dom";
 
 const AdminLoginpage = () => {

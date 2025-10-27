@@ -7,7 +7,7 @@ import { AlertCircle, Edit, Mail, MapPin, Phone, Trash2, User } from "lucide-rea
 import { Table, TableBody, TableCell, TableHead, TableRow, TableHeader } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import NewStudentForm from "@/components/constant/AddNewStudentForm";
+import NewStudentForm from "@/components/forms/AddNewStudentForm";
 import BulkUploadStudents from "./BulkUploadStudents";
 
 interface Student {

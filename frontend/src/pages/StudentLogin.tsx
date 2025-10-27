@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import StudentLoginForm from "@/components/constant/StudentFormLogin";
+import StudentLoginForm from "@/components/forms/StudentLoginForm";
 
 const Loginpage = () => {
   return (
