@@ -26,11 +26,11 @@ export default defineConfig({
         secure: false,
         rewrite: (path) => path.replace(/^\/backend/, '')
       },
-      '/authenticate': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-        secure: false,
-      }
+      // '/authenticate': {
+      //   target: 'http://localhost:3001',
+      //   changeOrigin: true,
+      //   secure: false,
+      // }
     }
   }
 })

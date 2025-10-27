@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import Overview from "./Overview";
-import StudentManagement from "./dashboard/DashboardStudentManagement";
+import Overview from "./dashboard/Overview";
+import StudentManagement from "./dashboard/StudentManagement";
 import AnalyticsDashboard from "./Analytics";
 import Reports from "./Reports";
 import { useNavigate } from "react-router-dom";

@@ -63,7 +63,7 @@ const NavigationStudent = () => {
     setLoading(true);
 
     try {
-      const response = await get("/getStudent", {user_id});
+      const response = await get("/student/getStudent", {user_id});
 
       if (response?.success) {
         setStudent(response.data);

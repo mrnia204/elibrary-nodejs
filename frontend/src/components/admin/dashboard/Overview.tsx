@@ -1,16 +1,31 @@
 import { get } from "@/lib/http";
 import { useEffect, useState } from "react";
+import TimeSpentPieChart from "../charts/pieOverview";
+
+type TimeRow = {
+  grade: string;
+  class: string;
+  total_time_spent: number;
+}
 
 interface DashboardStats {
   total_students: number;
   total_grades: number;
-  total_classes: number; // Fixed typo: was "total_clases"
+  total_classes: number; 
   total_hours: number;
-  students_per_grade: { grade: string; student_count: number }[]; // Fixed property name
+  studentsPerGrade: { grade: string; student_count: number }[]; // Fixed property name
+  timeSpentInWeek: TimeRow[];
 }
 
-const DashboardStats = () => {
-  const [stats, setStats] = useState<DashboardStats | null>(null);
+const Overview = () => {
+  const [stats, setStats] = useState<DashboardStats>({
+    total_students: 0,
+    total_grades: 0,
+    total_classes: 0,
+    total_hours: 0,
+    studentsPerGrade: [],
+    timeSpentInWeek: [],
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,7 +35,8 @@ const DashboardStats = () => {
       setError(null);
 
 
-      const response = await get('/getDashboard');
+      const response = await get('/admin/adminDashboard');
+      console.log("Dashboard response", response.data);
 
       if (response && response.success) {
         setStats(response.data);
@@ -120,20 +136,20 @@ const DashboardStats = () => {
       <div className="bg-white rounded-lg shadow p-6">
         <h3 className="text-lg font-semibold mb-4">Students per Grade</h3>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {stats.students_per_grade && stats.students_per_grade.length > 0 ? (
-            stats.students_per_grade.map((item) => (
-              <div key={item.grade} className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-2xl font-bold text-blue-600">{item.student_count}</div>
-                <div className="text-sm text-gray-600">Grade {item.grade}</div>
+            {stats.studentsPerGrade.map((item) => (
+              <div key={item.grade} className="text-center p-4 bg-teal-100 rounded-lg">   
+                <p className="text-sm text-gray-600">Grade {item.grade}</p>
+                <p className="text-2xl font-bold text-blue-600">{item.student_count}</p>
               </div>
-            ))
-           ) : (
-            <div className="text-gray-400 text-center col-span-full">No data available</div>
-          )}
+            ))}
         </div>
       </div> 
+
+      {/** Time spent in a week by grade and class */}
+      <TimeSpentPieChart data={stats.timeSpentInWeek} height={500} />
+      
     </div>
   );
 }
 
-export default DashboardStats;
+export default Overview;

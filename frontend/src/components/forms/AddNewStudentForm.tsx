@@ -55,7 +55,7 @@ const NewStudentForm = ({ open, onClose}: { open: boolean; onClose: () => void})
     setMessage(null);
 
     try {
-      const res: ApiResponse = await post("/register-student", values);
+      const res: ApiResponse = await post("/student/register-student", values);
 
       if (res && res.success) {
         setMessage(res.message || "Student added successfully!");

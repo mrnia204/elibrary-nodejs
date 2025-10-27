@@ -67,7 +67,7 @@ const StudentManagement = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await get('/getDashboard');
+      const response = await get('/admin/adminDashboard');
 
       if (response && response.success) {
         setStats(response.data);
