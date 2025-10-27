@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { SCHOOL_NAME } from "@/components/constant";
-import { Button } from "@/components/ui/button";
 
 const Homepage = () => {
   return ( 
@@ -19,12 +18,18 @@ const Homepage = () => {
             stay connected with school announcements and events.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer">
-              <NavLink to='/student-login'><i className="ri-user-line mr-2"></i>Student Login</NavLink>
-            </button>
-            <button className="bg-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer">
-               <NavLink to='/admin-login'><i className="ri-admin-line mr-2"></i>Admin Login</NavLink>
-            </button>
+            <NavLink to="/student-login">
+              <button className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-blue-700 transition-colors whitespace-nowrap cursor-pointer">
+                <i className="ri-user-line mr-2"></i>
+                Student Login
+              </button>
+            </NavLink>
+            <NavLink to="/admin-login">
+              <button className="bg-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-purple-700 transition-colors whitespace-nowrap cursor-pointer">
+                <i className="ri-admin-line mr-2"></i>
+               Admin Login
+              </button>
+            </NavLink>
           </div>
           
         </div>

@@ -307,15 +307,25 @@ app.post('/students/bulk', upload.single('file'), async (req, res) => {
 });
 
 
-// 6. POST student data to student dashboard. 
+// 6. GET student data to student dashboard. 
 app.get('/getStudent', async (req, res) => {
-  const { username} = req.body;
-  if (!username) {
+  const { user_id} = req.query;
+  console.log("=====/getStuent REQUEST ====");
+  console.log("Received the username", user_id);
+
+  if (!user_id) {
     return res.status(400).json({ success: false, message: 'Username is required'});
   }
 
+    // convert string to number
+  const userIdNum = Number(user_id);
+  if (isNaN(userIdNum)) {
+    return res.status(400).json({success: false, message: "Invalid user id"})
+  }
+
   try {
-    const [rows] = await pool.query('SELECT * FROM students WHERE username = ?', [username]);
+   
+    const [rows] = await pool.query('SELECT * FROM students WHERE user_id = ?', [userIdNum]);
 
     if (rows.length === 0) {
       return res.status(400).json({ success: false, message: "Student not found"});
@@ -326,6 +336,6 @@ app.get('/getStudent', async (req, res) => {
     console.error(error);
     return res.status(500).json({ success: false, message: "Database error"});
   }
-})
+});
 
 app.listen(3001, () => console.log("Node.js backend running on http://localhost:3001"));
