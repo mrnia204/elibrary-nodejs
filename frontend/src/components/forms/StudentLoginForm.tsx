@@ -40,7 +40,7 @@ const AdminLoginForm = () => {
 
     try {    
       // STEP 1: Authenticate using your /authenticate endpoint
-      const authRes = await post("/authenticate", {
+      const authRes = await post("/auth/authenticate", {
         username: values.username,
         password: values.password,
         role: "student", // This matches your backend expectation
@@ -57,7 +57,7 @@ const AdminLoginForm = () => {
       const user_id = authRes.user_id; // From your backend response
 
       // STEP 2. Fetch the student data. 
-      const studentRes = await get("/getStudent", {user_id});
+      const studentRes = await get("/student/getStudent", {user_id});
       if (!studentRes?.success) {
         setMessage("Failed to fetch student data");
         setLoading(false);
@@ -67,7 +67,7 @@ const AdminLoginForm = () => {
       const studentData = studentRes.data; 
 
       // STEP 3: Record login activity using your /log-activity endpoint
-      const activityRes = await post("/log-activity", {
+      const activityRes = await post("/activity/log-activity", {
         user_id: user_id,
         action: "login",
         // Note: activity_id is not needed for login action in your backend

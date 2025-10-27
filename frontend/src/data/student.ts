@@ -35,7 +35,7 @@ export const events: Event[] = [
 
 
 export const quickActions = [
-  { title: "Access eLibrary", content: "Browse digital resources", icon: "ri-book-open text-teal-600", bgClass: "bg-teal-50 hover:bg-teal-100", link: "#calendar"},
+  { title: "Access eLibrary", content: "Browse digital resources", icon: "ri-book-open text-teal-600", bgClass: "bg-teal-50 hover:bg-teal-100", link: "https://mrnia.vercel.app/"},
   { title: "View Shedule", content: "Check your Timetable", icon: "ri-calendar-check-open text-blue-600", bgClass: "bg-blue-50 hover:bg-blue-100", link: "#calendar"},
   { title: "Check Announcements", content: "Stay up to date", icon: "ri-file-text-line text-purple-600", bgClass: "bg-purple-50 hover:bg-purple-100",link: "#calendar"},
 ];

@@ -46,7 +46,7 @@ const Dropdown = ({ full_name, user_id, }: DropdownProps) => {
   const startActivity = async () => {
     if (!user_id) return;
     try {
-      const res = await post("/log-activity", { 
+      const res = await post("/activity/log-activity", { 
         user_id: user_id, 
         action: "login" 
       });
@@ -70,7 +70,7 @@ const Dropdown = ({ full_name, user_id, }: DropdownProps) => {
     if (isUpdating || !activityIdRef.current || !user_id) return;
     isUpdating = true;
     try {
-      await post("/log-activity", { 
+      await post("/activity/log-activity", { 
         user_id: user_id, 
         action: 'update', 
         activity_id: activityIdRef.current 
@@ -86,7 +86,7 @@ const Dropdown = ({ full_name, user_id, }: DropdownProps) => {
   const handleLogout = async (auto = false) => {
     if (activityIdRef.current && user_id) {
       try {
-        await post("/log-activity", { 
+        await post("/activity/log-activity", { 
           user_id: user_id, 
           action: "logout", 
           activity_id: activityIdRef.current 
